@@ -13,6 +13,7 @@ cair_maze/maze.py
 cair_maze/maze_game.py
 cair_maze/mechanics.py
 cair_maze/pathfinding.py
+dist/gym_maze-2.0.1-py3.9.egg
 documentation/deterministic_environments.png
 documentation/env_list.md
 documentation/maze_pomdp.png

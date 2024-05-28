@@ -9,7 +9,6 @@ class MazeEnv(gym.Env):
     def __init__(self, width, height, mechanic, mechanic_args):
 
         self.env = MazeGame((width, height), mechanic=mechanic, mechanic_args=mechanic_args)
-
         self.observation_space = gym.spaces.Box(low=0, high=255, shape=(640,480,3)) #self.env.get_state().shape
         self.action_space = gym.spaces.Discrete(4)
             
