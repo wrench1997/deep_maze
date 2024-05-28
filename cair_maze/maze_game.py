@@ -7,6 +7,9 @@ from .maze import Maze
 from .pathfinding import dfs
 from .mechanics import TimedPOMDPMaze, POMDPMaze, POMDPLimitedMaze, NormalMaze, TimedPOMDPLimitedMaze
 import os
+import platform
+
+system = platform.system()
 
 class StateType:
     ImageRGB = 0
@@ -62,9 +65,10 @@ class MazeGame:
         ##
         # Pygame Initialization
         ##
-        #############################################################
-        if "DISPLAY" not in os.environ:
-            os.environ['SDL_VIDEODRIVER'] = 'dummy'
+        if system != 'Windows':
+            #############################################################
+            if "DISPLAY" not in os.environ:
+                os.environ['SDL_VIDEODRIVER'] = 'dummy'
         pygame.init()
         pygame.font.init()
         pygame.display.set_caption("Deep Maze - v2.0")
@@ -254,8 +258,10 @@ class MazeGame:
         """
         #if type not in [StateType.ImageRGB, StateType.ImageGrayScale]:
         self.rectangles = self.sprites.draw(self.surface)
+        # rect2 = pygame.Rect((10, 10), (32, 32)) 
         self.screen.blit(self.surface, (0, 0))
         pygame.display.update(self.rectangles)
+        # pygame.display.flip()
         return self.get_state(type=mode)
 
     def on_return(self, reward, _type):
