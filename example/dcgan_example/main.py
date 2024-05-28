@@ -1,6 +1,6 @@
 from collections import namedtuple
 
-import gym
+import gymnasium as gym
 import gym_maze
 import random
 import numpy as np

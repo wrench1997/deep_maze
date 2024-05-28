@@ -1,4 +1,4 @@
-import gym
+import gymnasium as gym
 from cair_maze.maze_game import MazeGame
 
 

@@ -1,5 +1,5 @@
 
-import gym
+import gymnasium as gym
 import random
 import time
 import gym_maze

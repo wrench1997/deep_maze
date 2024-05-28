@@ -2,7 +2,7 @@ import glob
 import random
 import shutil
 import base64
-import gym
+import gymnasium as gym
 from PIL import Image
 from io import BytesIO
 
