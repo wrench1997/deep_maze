@@ -1,5 +1,5 @@
 numpy
-pygame==2.1.2
+pygame
 scikit-image
 gymnasium
 
