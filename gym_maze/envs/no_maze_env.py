@@ -1,5 +1,5 @@
 import gymnasium as gym
-from gym.envs import register
+from gymnasium.envs import register
 
 from cair_maze.maze_game import MazeGame
 from cair_maze.mechanics import BaseMazeMechanic

@@ -1,4 +1,4 @@
-from gym.envs.registration import register
+from gymnasium.envs.registration import register
 import gym_maze.envs.maze_env
 
 
@@ -12,10 +12,12 @@ class StateWrapper:
         return self.render()
 
     def render(self):
-        return self.env.render(mode=self.type)
+        #mode=self.type
+        return self.env.render()
 
     def step(self, a):
-        return self.env.step(a, type=self.type)
+        # type=self.type 
+        return self.env.step(a)
 
 
 class StateRGBWrapper(StateWrapper):

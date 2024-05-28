@@ -113,6 +113,7 @@ class MazeGame:
         self.maze = None
         self.maze_optimal_path = None
         self.maze_optimal_path_length = None
+        # self.render_mode = render_mode
 
         #############################################################
         ##
@@ -122,6 +123,7 @@ class MazeGame:
         self.player, self.target = None, None
         self.player_steps = None
         self.terminal = None
+        # self.render_mode = render_mode
 
         #############################################################
         ##
@@ -133,13 +135,14 @@ class MazeGame:
         # Reset the game
         self.reset()
 
-    def get_state(self, type=StateType.DEFAULT, resize=None):
+    def get_state(self, type="human", resize=None):
         """
         Retrieve a state representation. This can be configured using MazeGame.set_preprocess(preprocess=dict)
         :return: A numpy formatted state representation
         """
 
-        if type == StateType.ImageRGB or type == StateType.ImageGrayScale:
+        if type == "human" or type == StateType.ImageGrayScale:
+        # if type == StateType.ImageRGB or type == StateType.ImageGrayScale :
             state = pygame.surfarray.pixels3d(self.surface)
             state = np.array(state, dtype=np.uint8)
 
@@ -151,7 +154,7 @@ class MazeGame:
 
             state = state[:, ::-1]
 
-        elif type == StateType.Array or type == StateType.ArrayFlat:
+        elif type == "rgb_array" or type == "rgb_array_list":
             state = np.array(self.maze.grid, copy=True)
             state[self.player[0], self.player[1]] = 2
             state[self.target[0], self.target[1]] = 3
@@ -163,7 +166,7 @@ class MazeGame:
 
         return state
 
-    def reset(self, type=StateType.DEFAULT):
+    def reset(self, render_mode="human"):
         """
         Resets the game-state
         :return: The State
@@ -210,7 +213,7 @@ class MazeGame:
         self.rectangles = self.sprites.draw(self.surface)
 
         # Return state
-        return self.get_state(type=type)
+        return self.get_state(type=render_mode)
 
     def spawn_players(self):
         """
@@ -244,7 +247,7 @@ class MazeGame:
 
         return start_positions
 
-    def render(self, type=StateType.DEFAULT):
+    def render(self, mode="human"): #type=StateType.DEFAULT
         """
         Render the game-state to the SCREEN (For visualizing, not required for drawing the state to the SURFACE)
         :return:
@@ -253,7 +256,7 @@ class MazeGame:
         self.rectangles = self.sprites.draw(self.surface)
         self.screen.blit(self.surface, (0, 0))
         pygame.display.update(self.rectangles)
-        return self.get_state(type=type)
+        return self.get_state(type=mode)
 
     def on_return(self, reward, _type):
         """
@@ -266,7 +269,7 @@ class MazeGame:
             step_count=self.player_steps
         )
 
-    def step(self, a, type=StateType.DEFAULT):
+    def step(self, a, type='human'):
         """
         The step function is a gym-compatible step function
         :param a: Action index from 0 - 3
